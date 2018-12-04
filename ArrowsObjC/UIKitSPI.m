@@ -51,19 +51,19 @@ NSString* WebEventInitStr() {
 }
 
 static IMP _original_WebEventInit_Imp;
-void _replacement__WebEventInit(id self,
-                                SEL _cmd,
-                                WebEventType type,
-                                CFTimeInterval timeStamp,
-                                NSString* characters,
-                                NSString* charactersIgnoringModifiers,
-                                WebEventFlags modifiers,
-                                BOOL repeating,
-                                NSUInteger flags,
-                                uint16_t keyCode,
-                                BOOL tabKey,
-                                WebEventCharacterSet characterSet
-                                )
+id _replacement__WebEventInit(id self,
+                              SEL _cmd,
+                              WebEventType type,
+                              CFTimeInterval timeStamp,
+                              NSString* characters,
+                              NSString* charactersIgnoringModifiers,
+                              WebEventFlags modifiers,
+                              BOOL repeating,
+                              NSUInteger flags,
+                              uint16_t keyCode,
+                              BOOL tabKey,
+                              WebEventCharacterSet characterSet
+                              )
 {
     NSLog(@"WebEventInit:");
     assert([NSStringFromSelector(_cmd) isEqualToString:WebEventInitStr()]);
@@ -76,20 +76,20 @@ void _replacement__WebEventInit(id self,
         }
     }
     
-    ((id(*)(
-            id,
-            SEL,
-            WebEventType,
-            CFTimeInterval,
-            NSString*,
-            NSString*,
-            WebEventFlags,
-            BOOL,
-            NSUInteger,
-            uint16_t,
-            BOOL,
-            WebEventCharacterSet
-            ))_original_WebEventInit_Imp)
+    return ((id(*)(
+                   id,
+                   SEL,
+                   WebEventType,
+                   CFTimeInterval,
+                   NSString*,
+                   NSString*,
+                   WebEventFlags,
+                   BOOL,
+                   NSUInteger,
+                   uint16_t,
+                   BOOL,
+                   WebEventCharacterSet
+                   ))_original_WebEventInit_Imp)
     (self,
      _cmd,
      type,
@@ -162,5 +162,6 @@ void _replacement__handleKeyUIEvent(id self, SEL _cmd,UIEvent* event)
                                                                (IMP)_replacement__handleKeyUIEvent);
 }
 @end
+
 
 
